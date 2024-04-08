@@ -6,20 +6,20 @@ import 'package:newmaster/mainBody.dart';
 import 'package:newmaster/page/P01DASHBOARD/P01DASHBOARD.dart';
 import 'package:newmaster/page/page2-data/autofeed-input.dart';
 import 'package:newmaster/constants.dart';
-import 'package:newmaster/page/tank/Tank9-data/layout-chart.dart';
-import 'package:newmaster/page/tank/tank9-data/layout-chart2-2.dart';
-import '../tank9.dart';
+import 'package:newmaster/page/tank/Tank10-data/layout-chart.dart';
+import 'package:newmaster/page/tank/Tank10-data/layout-chart2-2.dart';
+import '../Tank10.dart';
 import 'layout-chart2.dart';
 
-late BuildContext Tank9Context;
+late BuildContext Tank10Context;
 late BuildContext Page02Context;
 
-class Tank9 extends StatelessWidget {
-  const Tank9({Key? key}) : super(key: key);
+class Tank10 extends StatelessWidget {
+  const Tank10({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Tank9Context = context;
+    Tank10Context = context;
 
     return Scaffold(
         appBar: AppBar(
@@ -32,18 +32,18 @@ class Tank9 extends StatelessWidget {
             },
           ),
         ),
-        body: Tank9Body());
+        body: Tank10Body());
   }
 }
 
-class Tank9Body extends StatefulWidget {
-  const Tank9Body({super.key});
+class Tank10Body extends StatefulWidget {
+  const Tank10Body({super.key});
 
   @override
-  State<Tank9Body> createState() => _P1DASHBOARDMAINState2();
+  State<Tank10Body> createState() => _P1DASHBOARDMAINState2();
 }
 
-class _P1DASHBOARDMAINState2 extends State<Tank9Body> {
+class _P1DASHBOARDMAINState2 extends State<Tank10Body> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -149,7 +149,7 @@ class _P1DASHBOARDMAINState2 extends State<Tank9Body> {
                       ),
                       ElevatedButton.icon(
                         onPressed: () {
-                          CuPage = Tank9BodyPage();
+                          CuPage = Tank10BodyPage();
                           MainBodyContext.read<ChangePage_Bloc>()
                               .add(ChangePage_nodrower());
                         },

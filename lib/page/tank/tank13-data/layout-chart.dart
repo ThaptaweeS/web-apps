@@ -3,8 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:newmaster/responsive.dart';
-import 'package:newmaster/page/tank/tank9-data/line_chart_sample9-2.dart';
-import 'package:newmaster/page/tank/tank9-data/line_chart_sample9.dart';
+import 'package:newmaster/page/tank/tank13-data/line_chart_sample13-2.dart';
+import 'package:newmaster/page/tank/tank13-data/line_chart_sample13.dart';
 
 
 List<HistoryChartModel> output = [];
@@ -61,7 +61,7 @@ class Chart133 extends StatefulWidget {
 class _Chart133State extends State<Chart133> {
   Future<List<Map<String, dynamic>>> fetchDataFromAPI() async {
     final response =
-        await http.post(Uri.parse('http://127.0.0.1:1111/tank9-TA'));
+        await http.post(Uri.parse('http://127.0.0.1:1111/tank13-con'));
     if (response.statusCode == 200) {
       final List<dynamic> responseData = json.decode(response.body);
       final List<Map<String, dynamic>> data =
@@ -106,7 +106,7 @@ class _Chart133State extends State<Chart133> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "T.A.(Point) Chart",
+                    "Concentration (%) Chart",
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontSize: 14, // Set your desired font size here
                         ),
@@ -155,7 +155,7 @@ class Chart13 extends StatefulWidget {
 class _Chart13State extends State<Chart13> {
   Future<List<Map<String, dynamic>>> fetchDataFromAPI() async {
     final response =
-        await http.post(Uri.parse('http://127.0.0.1:1111/tank9-FA'));
+        await http.post(Uri.parse('http://127.0.0.1:1111/tank13-FA'));
     if (response.statusCode == 200) {
       final List<dynamic> responseData = json.decode(response.body);
       final List<Map<String, dynamic>> data =
@@ -287,7 +287,7 @@ class _BarChartBodyState extends State<BarChartBody> {
 
   Future<void> fetchData() async {
     final response = await http.post(
-      Uri.parse('http://127.0.0.1:1111/chem-feed91'),
+      Uri.parse('http://127.0.0.1:1111/chem-feed131'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -326,7 +326,7 @@ class SimpleBarChart extends StatelessWidget {
           domainFn: (ChartData sales, _) => sales.date,
           measureFn: (ChartData sales, _) => sales.value,
           data: data,
-          displayName: 'PB-3650(M)(kg/day)',
+          displayName: 'PB-181X(M)(kg/day)',
           colorFn: (ChartData sales, _) {
             if (sales.value <= 20) {
               return charts.ColorUtil.fromDartColor(

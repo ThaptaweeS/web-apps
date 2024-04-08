@@ -344,24 +344,9 @@ class Chart21 extends StatelessWidget {
         Container(
           height: MediaQuery.of(context).size.height *
               0.6, // Specify the height here
-          child: Expanded(
-            // Wrap with Expanded to provide constraints
-            child: Responsive(
-              mobile: BarChartBody(
-                crossAxisCount: _size.width < 650 ? 2 : 4,
-                childAspectRatio:
-                    _size.width < 650 && _size.width > 350 ? 1.3 : 1,
-              ),
-              tablet: BarChartBody(
-                crossAxisCount: _size.width < 650 ? 2 : 4,
-                childAspectRatio:
-                    _size.width < 650 && _size.width > 350 ? 1.3 : 1,
-              ),
-              desktop: BarChartBody(
-                childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,
-                crossAxisCount: _size.width < 800 ? 2 : 4,
-              ),
-            ),
+          child: BarChartBody(
+            crossAxisCount: _size.width < 650 ? 2 : 4,
+            childAspectRatio: _size.width < 650 && _size.width > 350 ? 1.3 : 1,
           ),
         ),
       ],
@@ -429,13 +414,10 @@ class SimpleBarChart extends StatelessWidget {
           measureFn: (ChartData sales, _) => sales.value,
           data: data,
           displayName: 'FC-4360(kg/day)',
-          // Customizing the color of the bars based on the value
           colorFn: (ChartData sales, _) {
             if (sales.value <= 20) {
               return charts.ColorUtil.fromDartColor(
                   Color.fromARGB(255, 43, 119, 182));
-              // } else if (sales.value <= 25) {
-              //   return charts.ColorUtil.fromDartColor(Colors.orange);
             } else {
               return charts.ColorUtil.fromDartColor(
                   Color.fromARGB(255, 43, 119, 182));
@@ -452,21 +434,14 @@ class SimpleBarChart extends StatelessWidget {
           showVerticalFollowLine:
               charts.LinePointHighlighterFollowLineType.nearest,
         ),
-        // Create a dashed line
         charts.RangeAnnotation([
-          // Create multiple line segments with small spaces between them
           for (var i = 0; i < 100; i += 4)
             charts.LineAnnotationSegment(
-              // Y-value of the line
               20,
-              // Color and thickness of the line
               charts.RangeAnnotationAxisType.measure,
               color: charts.ColorUtil.fromDartColor(Colors.green),
               strokeWidthPx: 4.0,
-              dashPattern: [
-                2,
-                2
-              ], // Define the dash pattern [dash length, space length]
+              dashPattern: [2, 2],
             )
         ]),
       ],

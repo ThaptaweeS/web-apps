@@ -1,63 +1,47 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:newmaster/components/chart2.dart';
-import 'package:newmaster/data/global.dart';
-import 'package:newmaster/page/page02.dart';
-import 'package:newmaster/page/page2-data/text-card.dart';
-import 'package:newmaster/page/tank/tank1-data/data_page01.dart';
-import 'package:newmaster/components/recent_files.dart';
-import 'package:newmaster/constants.dart';
-import 'package:newmaster/page/tank/tank1-data/layout-history.dart';
-import 'package:newmaster/page/tank/tank1-data/pump.dart';
-import 'package:newmaster/presentation/samples/bar/bar_chart_sample1.dart';
-import 'package:newmaster/presentation/samples/bar/bar_chart_sample2.dart';
-import 'package:newmaster/presentation/samples/line/line_chart_sample2.dart';
-import 'package:newmaster/presentation/samples/line/line_chart_sample3.dart';
-import 'package:newmaster/presentation/samples/line/line_chart_sample4.dart';
-import 'package:newmaster/responsive.dart';
-import 'package:newmaster/widget/appbar/AppBar.dart';
-import 'package:newmaster/widget/common/Radiobutton.dart';
-import 'package:newmaster/widget/menu/side_menu.dart';
-import 'package:newmaster/page/tank/tank1-data/layout-chart.dart';
 import 'package:http/http.dart' as http;
-
-import '../../bloc/BlocEvent/ChangePageEvent.dart';
-import '../../mainBody.dart';
+import 'package:newmaster/bloc/BlocEvent/ChangePageEvent.dart';
+import 'package:newmaster/data/global.dart';
+import 'package:newmaster/mainBody.dart';
+import 'package:newmaster/page/page02.dart';
 
 late BuildContext FeedHistoryContext;
 
 class FeedHistory extends StatelessWidget {
   const FeedHistory({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    FeedHistoryContext = context;
-
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              CuPage = Page02body();
-              MainBodyContext.read<ChangePage_Bloc>()
-                  .add(ChangePage_nodrower());
-            },
-          ),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            CuPage = Page02body();
+            MainBodyContext.read<ChangePage_Bloc>().add(ChangePage_nodrower());
+          },
         ),
-        body: FeedHistoryBody());
+      ),
+      body: FeedHistoryBody(),
+    );
   }
 }
 
 class FeedHistoryBody extends StatefulWidget {
-  const FeedHistoryBody({super.key});
+  const FeedHistoryBody({Key? key});
 
   @override
-  State<FeedHistoryBody> createState() => _P1DASHBOARDMAINState2();
+  State<FeedHistoryBody> createState() => _FeedHistoryBodyState();
 }
 
-class _P1DASHBOARDMAINState2 extends State<FeedHistoryBody> {
+class _FeedHistoryBodyState extends State<FeedHistoryBody> {
   late List<Map<String, dynamic>> tableData = [];
-  late List<bool> showDetails = [];
+  String selectedTank = ''; // Selected tank value for filtering
+  String? selectedYear;
+  String? selectedMonth;
+  String? selectedDay;
 
   @override
   void initState() {
@@ -73,8 +57,6 @@ class _P1DASHBOARDMAINState2 extends State<FeedHistoryBody> {
         final List<dynamic> responseData = json.decode(response.body);
         setState(() {
           tableData = responseData.cast<Map<String, dynamic>>();
-          // Initialize showDetails list with false for each row
-          showDetails = List<bool>.filled(tableData.length, false);
         });
       } else {
         throw Exception('Failed to fetch data');
@@ -84,143 +66,224 @@ class _P1DASHBOARDMAINState2 extends State<FeedHistoryBody> {
     }
   }
 
-  // Method to toggle visibility of details for a row
-  void toggleDetailsVisibility(int index) {
-    setState(() {
-      showDetails[index] = !showDetails[index];
-    });
-  }
-
-  // Method to show popup dialog
-  void showDetailPopup(int index) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Details'),
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Chemicals: ${tableData[index]['Detail']}'),
-              Text('Feed : ${tableData[index]['Solv']}'),
-            ],
-          ),
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                // Call API1 ('Passed' endpoint)
-                _callAPI('Passed', tableData[index]['id']).then((_) {
-                  // Fetch updated data for the table
-                  fetchDataFromAPI();
-                  // Close the dialog
-                  Navigator.of(context).pop();
-                });
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green, // Change the button color to green
-              ),
-              child: Text('Pass'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // Call API2 ('Approve' endpoint)
-                _callAPI('Feed', tableData[index]['id']).then((_) {
-                  // Fetch updated data for the table
-                  fetchDataFromAPI();
-                  // Close the dialog
-                  Navigator.of(context).pop();
-                });
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange, // Change the button color to orange
-              ),
-              child: Text('Feed'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red, // Change the button color to red
-              ),
-              child: Text('Close'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  // Method to call API
-  Future<void> _callAPI(String endpoint, int id) async {
-    try {
-      final response = await http.post(
-        Uri.parse('http://127.0.0.1:1111/$endpoint'),
-        body: {'id': id.toString()},
-      );
-      if (response.statusCode == 200) {
-        // API call successful
-        print('API call successful: $endpoint, id: $id');
-        // You can perform any additional actions here if needed
-      } else {
-        // API call failed
-        print('Failed to call API: $endpoint, id: $id');
-        // You can handle errors or display a message to the user
+  List<Map<String, dynamic>> filterDataByDate(List<Map<String, dynamic>> data,
+      String? year, String? month, String? day) {
+    // Implement filtering logic based on selected date
+    return data.where((item) {
+      if (year != null && item['date'].startsWith(year)) {
+        if (month != null && item['date'].substring(5, 7) != month) {
+          return false;
+        }
+        if (day != null && item['date'].substring(8) != day) {
+          return false;
+        }
+        return true;
       }
-    } catch (error) {
-      // An error occurred during the API call
-      print('Error calling API: $error');
-      // You can handle errors or display a message to the user
-    }
+      return false;
+    }).toList();
   }
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> filteredData = filterDataByDate(
+        tableData
+            .where(
+                (data) => selectedTank.isEmpty || data['tank'] == selectedTank)
+            .toList(),
+        selectedYear,
+        selectedMonth,
+        selectedDay);
+
+    print('Selected tank: $selectedTank');
+    print('Selected year: $selectedYear');
+    print('Selected month: $selectedMonth');
+    print('Selected day: $selectedDay');
+    print('Filtered data length: ${filteredData.length}');
+
     return SafeArea(
-      child: SingleChildScrollView(
-        primary: false,
-        padding: EdgeInsets.all(16.0),
+      child: Container(
+        alignment: Alignment.topLeft,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            InkWell(
-              onTap: () {},
-              child: ListTile(
+              ListTile(
                 leading: Icon(
                   Icons.heat_pump,
                   size: 36.0,
                   color: Colors.white,
                 ),
                 title: Text(
-                  'Feed Chemical History: Dashboard',
+                  'Feed History : Dashboard',
                   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                 ),
               ),
+            // Dropdown for filtering by tank value
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: DropdownButton<String>(
+                value: selectedTank,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    selectedTank = newValue!;
+                  });
+                },
+                items: <String>['', '1', '2'] // Add other tank values here
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text('Tank $value'),
+                  );
+                }).toList(),
+              ),
             ),
-            SizedBox(height: 16.0),
-            DataTable(
-              columns: [
-                DataColumn(label: Text('Tank')),
-                DataColumn(label: Text('Detail')),
-                DataColumn(label: Text('Lot')),
-                DataColumn(label: Text('Name')),
-                DataColumn(label: Text('Value(Kg)')),
-                DataColumn(label: Text('Date')),
-                DataColumn(label: Text('Time')),
+            Row(
+              children: [
+                // Dropdown for selecting year
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DropdownButton<String>(
+                    value: selectedYear,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedYear = newValue;
+                      });
+                    },
+                    items: <String?>[
+                      '',
+                      '2024',
+                      '2023'
+                    ] // Add other year options here
+                        .map<DropdownMenuItem<String>>((String? value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value ?? 'All'),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                // Dropdown for selecting month
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DropdownButton<String>(
+                    value: selectedMonth,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedMonth = newValue;
+                      });
+                    },
+                    items: <String?>[
+                      '',
+                      '01',
+                      '02',
+                      '03',
+                      '04',
+                      '05',
+                      '06',
+                      '07',
+                      '08',
+                      '09',
+                      '10',
+                      '11',
+                      '12'
+                    ] // Add other month options here
+                        .map<DropdownMenuItem<String>>((String? value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value ?? 'All'),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                // Dropdown for selecting day
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DropdownButton<String>(
+                    value: selectedDay,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedDay = newValue;
+                      });
+                    },
+                    items: <String?>[
+                      '',
+                      '01',
+                      '02',
+                      '03',
+                      '04',
+                      '05',
+                      '06',
+                      '07',
+                      '08',
+                      '09',
+                      '10',
+                      '11',
+                      '12',
+                      '13',
+                      '14',
+                      '15',
+                      '16',
+                      '17',
+                      '18',
+                      '19',
+                      '20',
+                      '21',
+                      '22',
+                      '23',
+                      '24',
+                      '25',
+                      '26',
+                      '27',
+                      '28',
+                      '29',
+                      '30',
+                      '31'
+                    ] // Add other day options here
+                        .map<DropdownMenuItem<String>>((String? value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value ?? 'All'),
+                      );
+                    }).toList(),
+                  ),
+                ),
               ],
-              rows: List.generate(tableData.length, (index) {
-                return DataRow(
-                  cells: [
-                    DataCell(Text(tableData[index]['tank'].toString())),
-                    DataCell(Text(tableData[index]['detail'].toString())),
-                    DataCell(Text(tableData[index]['lot'].toString())),
-                    DataCell(Text(tableData[index]['name'].toString())),
-                    DataCell(Text(tableData[index]['value'].toString())),
-                    DataCell(Text(tableData[index]['date'].toString())),
-                    DataCell(Text(tableData[index]['time'].toString())),
-                  ],
-                );
-              }),
+            ),
+            Expanded(
+              child: Center(
+                child: SingleChildScrollView(
+                  primary: false,
+                  child: DataTable(
+                    columns: [
+                      DataColumn(label: Text('Tank')),
+                      DataColumn(label: Text('Detail')),
+                      DataColumn(label: Text('Lot')),
+                      DataColumn(label: Text('Name')),
+                      DataColumn(label: Text('Value(Kg)')),
+                      DataColumn(label: Text('Date')),
+                      DataColumn(label: Text('Time')),
+                    ],
+                    rows: List<DataRow>.generate(filteredData.length, (index) {
+                      return DataRow(
+                        cells: [
+                          DataCell(
+                              Text(filteredData[index]['tank'].toString())),
+                          DataCell(
+                              Text(filteredData[index]['detail'].toString())),
+                          DataCell(Text(filteredData[index]['lot'].toString())),
+                          DataCell(
+                              Text(filteredData[index]['name'].toString())),
+                          DataCell(
+                              Text(filteredData[index]['value'].toString())),
+                          DataCell(
+                              Text(filteredData[index]['date'].toString())),
+                          DataCell(
+                              Text(filteredData[index]['time'].toString())),
+                        ],
+                      );
+                    }),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

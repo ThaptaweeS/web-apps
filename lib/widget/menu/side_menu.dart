@@ -60,14 +60,13 @@ class SideMenu extends StatelessWidget {
         "svgSrc": "assets/icons/menu_notification.svg",
         "page": null,
         "accessLevel": [2, 5]
-      }, // Adjust access level as needed
+      },
       {
         "title": "Settings",
         "svgSrc": "assets/icons/menu_setting.svg",
         "page": PasswordSettingPage(),
         "accessLevel": 2
-      }, // Adjust access level as needed
-
+      },
       {
         "title": "Settings",
         "svgSrc": "assets/icons/menu_setting.svg",
@@ -79,7 +78,19 @@ class SideMenu extends StatelessWidget {
         "svgSrc": "assets/icons/logout-svgrepo-com.svg",
         "page": null,
         "accessLevel": [2, 5]
-      }, // Adjust access level as needed
+      },
+      {
+        "title": "About",
+        "svgSrc": "assets/icons/menu_about.svg",
+        "page": null,
+        "accessLevel": 2
+      },
+      {
+        "title": "About",
+        "svgSrc": "assets/icons/menu_about.svg",
+        "page": null,
+        "accessLevel": 5
+      },
     ];
 
     // Filter the menu items based on the user's access level
@@ -117,6 +128,8 @@ class SideMenu extends StatelessWidget {
                     MainBodyContext.read<ChangePage_Bloc>().add(ChangePage());
                   } else if (item["title"] == "Logout") {
                     LoginContext.read<Login_Bloc>().add(Logout());
+                  } else if (item["title"] == "About") {
+                    _showAboutPopup(MenuContext);
                   }
                 },
                 textSize: 15.0,
@@ -124,6 +137,29 @@ class SideMenu extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _showAboutPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('About'),
+          content: Text(
+            'Developer by Automation Team. \n © 2020 Thai Parkerizing Co., Ltd. All rights reserved.',
+            style: TextStyle(fontSize: 16.0),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Close'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

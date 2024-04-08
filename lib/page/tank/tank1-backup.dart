@@ -1,28 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:newmaster/bloc/BlocEvent/ChangePageEvent.dart';
-import 'package:newmaster/components/chart2.dart';
 import 'package:newmaster/data/global.dart';
 import 'package:newmaster/mainBody.dart';
 import 'package:newmaster/page/page2-data/autofeed-input.dart';
-import 'package:newmaster/page/tank/tank1-data/data_page01.dart';
-import 'package:newmaster/components/recent_files.dart';
 import 'package:newmaster/constants.dart';
-import 'package:newmaster/page/tank/tank1-data/layout-history.dart';
-import 'package:newmaster/page/tank/tank1-data/pump.dart';
-import 'package:newmaster/presentation/samples/bar/bar_chart_sample1.dart';
-import 'package:newmaster/presentation/samples/bar/bar_chart_sample2.dart';
-import 'package:newmaster/presentation/samples/line/line_chart_sample2.dart';
-import 'package:newmaster/presentation/samples/line/line_chart_sample3.dart';
-import 'package:newmaster/presentation/samples/line/line_chart_sample4.dart';
-import 'package:newmaster/responsive.dart';
-import 'package:newmaster/widget/appbar/AppBar.dart';
-import 'package:newmaster/widget/common/Radiobutton.dart';
-import 'package:newmaster/widget/menu/side_menu.dart';
 import 'package:newmaster/page/tank/tank1-data/layout-chart.dart';
-import 'package:newmaster/page/page02.dart';
-import 'package:newmaster/page/page2-data/autofeed-input.dart';
 
 import '../P01DASHBOARD/P01DASHBOARD.dart';
 import 'tank2.dart';
@@ -45,8 +28,6 @@ class Tank1 extends StatelessWidget {
               CuPage = P1DASHBOARDMAIN();
               MainBodyContext.read<ChangePage_Bloc>()
                   .add(ChangePage_nodrower());
-
-              // Handle back button click
             },
           ),
         ),
@@ -69,6 +50,7 @@ class _P1DASHBOARDMAINState2 extends State<Tank1Body> {
         primary: false,
         padding: EdgeInsets.all(defaultPadding),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             InkWell(
               onTap: () {
@@ -86,29 +68,26 @@ class _P1DASHBOARDMAINState2 extends State<Tank1Body> {
                 ),
               ),
             ),
-            // SizedBox(height: defaultPadding),
+            SizedBox(height: defaultPadding),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  flex: 2,
+                  flex: 3,
                   child: Column(
                     children: [
                       Chart133(),
                     ],
                   ),
                 ),
-                SizedBox(
-                  width: 10,
-                ),
+                SizedBox(width: defaultPadding),
                 Expanded(
-                  flex: 2,
+                  flex: 3,
                   child: Chart13(),
                 ),
-                SizedBox(width: defaultPadding),
               ],
             ),
-            // SizedBox(height: defaultPadding), // Add space between the rows
+            SizedBox(height: defaultPadding),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -117,47 +96,10 @@ class _P1DASHBOARDMAINState2 extends State<Tank1Body> {
                   child: Column(
                     children: [
                       Chart21(),
-                      // SizedBox(height: defaultPadding),
-                      if (Responsive.isMobile(context))
-                        // SizedBox(height: defaultPadding),
-                        if (Responsive.isMobile(context)) Chart21(),
                     ],
                   ),
                 ),
-
-                // SizedBox(
-                //   width: 10,
-                // ),
-                // Expanded(
-                //   flex: 2,
-                //   child: Container(
-                //     width: 200.0,
-                //     height: 300.0,
-                //     child:
-                //         BarChartSample2(), // Replace YourWidget with the actual widget
-                //   ),
-                // ),
-                // Add more widgets as needed
-                //   ],
-                // ),
-                // // SizedBox(height: 10),
-                // Row(
-                //   crossAxisAlignment: CrossAxisAlignment.center,
-                //   children: [
-                // Expanded(
-                //   flex: 2,
-                //   child: Column(
-                //     children: [
-                //       DataHistory2(),
-                //       SizedBox(height: defaultPadding),
-                //       if (Responsive.isMobile(context)) DataHistory2(),
-                //       // SizedBox(height: defaultPadding),
-                //     ],
-                //   ),
-                // ),
-                // SizedBox(
-                //   width: 10,
-                // ),
+                SizedBox(width: defaultPadding),
                 Expanded(
                   flex: 2,
                   child: Column(
@@ -182,8 +124,9 @@ class _P1DASHBOARDMAINState2 extends State<Tank1Body> {
                               Size(120, 60), // Set the size of the button
                         ),
                       ),
-                      SizedBox(height: 25,)
-                      ,
+                      SizedBox(
+                        height: 25,
+                      ),
                       ElevatedButton.icon(
                         onPressed: () {
                           CuPage = Tank2BodyPage();
@@ -197,22 +140,11 @@ class _P1DASHBOARDMAINState2 extends State<Tank1Body> {
                           backgroundColor: Color.fromARGB(255, 15, 161, 130),
                           minimumSize:
                               Size(120, 60), // Set the size of the button
-                        )
+                        ),
                       ),
-                      // First FileInfoCardGridView
-                      // FileInfoCardGridView(), // You can adjust the size or style within the FileInfoCardGridView class
-                      // SizedBox(height : 10,),
-                      // Second FileInfoCardGridView
-                      // FileInfoCardGridView2(), // You can adjust the size or style within the FileInfoCardGridView2 class
-
-                      // Additional widgets can be added here
-
-                      // Rest of your Column children
-                      // ...
                     ],
                   ),
                 ),
-                // Add more widgets as needed
               ],
             ),
           ],

@@ -6,20 +6,20 @@ import 'package:newmaster/mainBody.dart';
 import 'package:newmaster/page/P01DASHBOARD/P01DASHBOARD.dart';
 import 'package:newmaster/page/page2-data/autofeed-input.dart';
 import 'package:newmaster/constants.dart';
-import 'package:newmaster/page/tank/Tank9-data/layout-chart.dart';
-import 'package:newmaster/page/tank/tank9-data/layout-chart2-2.dart';
-import '../tank9.dart';
+import 'package:newmaster/page/tank/Tank8-data/layout-chart.dart';
+import 'package:newmaster/page/tank/Tank8-data/layout-chart2-2.dart';
+import '../Tank8.dart';
 import 'layout-chart2.dart';
 
-late BuildContext Tank9Context;
+late BuildContext Tank8Context;
 late BuildContext Page02Context;
 
-class Tank9 extends StatelessWidget {
-  const Tank9({Key? key}) : super(key: key);
+class Tank8 extends StatelessWidget {
+  const Tank8({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Tank9Context = context;
+    Tank8Context = context;
 
     return Scaffold(
         appBar: AppBar(
@@ -32,18 +32,18 @@ class Tank9 extends StatelessWidget {
             },
           ),
         ),
-        body: Tank9Body());
+        body: Tank8Body());
   }
 }
 
-class Tank9Body extends StatefulWidget {
-  const Tank9Body({super.key});
+class Tank8Body extends StatefulWidget {
+  const Tank8Body({super.key});
 
   @override
-  State<Tank9Body> createState() => _P1DASHBOARDMAINState2();
+  State<Tank8Body> createState() => _P1DASHBOARDMAINState2();
 }
 
-class _P1DASHBOARDMAINState2 extends State<Tank9Body> {
+class _P1DASHBOARDMAINState2 extends State<Tank8Body> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -64,7 +64,7 @@ class _P1DASHBOARDMAINState2 extends State<Tank9Body> {
                   color: const Color.fromARGB(255, 255, 255, 255),
                 ),
                 title: Text(
-                  'Zinc Phosphate (6700L) : Dashboard',
+                  'Surface condition (5000L) : Dashboard',
                   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -77,14 +77,14 @@ class _P1DASHBOARDMAINState2 extends State<Tank9Body> {
                   flex: 3,
                   child: Column(
                     children: [
-                      Chart133(),
+                      Chart13(),
                     ],
                   ),
                 ),
                 SizedBox(width: defaultPadding),
                 Expanded(
                   flex: 3,
-                  child: Chart13(),
+                  child: Chart133(),
                 ),
               ],
             ),
@@ -93,29 +93,10 @@ class _P1DASHBOARDMAINState2 extends State<Tank9Body> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  flex: 3,
+                  flex: 2,
                   child: Column(
                     children: [
-                      Chart134(),
-                    ],
-                  ),
-                ),
-                SizedBox(width: defaultPadding),
-                Expanded(
-                  flex: 3,
-                  child: Chart135(),
-                ),
-              ],
-            ),
-            SizedBox(height: defaultPadding),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                    children: [
-                      Chart136(),
+                      Chart21(),
                     ],
                   ),
                 ),
@@ -149,7 +130,7 @@ class _P1DASHBOARDMAINState2 extends State<Tank9Body> {
                       ),
                       ElevatedButton.icon(
                         onPressed: () {
-                          CuPage = Tank9BodyPage();
+                          CuPage = Tank8BodyPage();
                           MainBodyContext.read<ChangePage_Bloc>()
                               .add(ChangePage_nodrower());
                         },
@@ -162,29 +143,6 @@ class _P1DASHBOARDMAINState2 extends State<Tank9Body> {
                               Size(120, 60), // Set the size of the button
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: defaultPadding),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    children: [
-                      Chart21(),
-                    ],
-                  ),
-                ),
-                SizedBox(width: defaultPadding),
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    children: [
-                      Chart25(),
                     ],
                   ),
                 ),

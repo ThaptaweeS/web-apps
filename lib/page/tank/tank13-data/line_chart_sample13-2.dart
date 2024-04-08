@@ -5,8 +5,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class LineChartSample95 extends StatefulWidget {
-  LineChartSample95({
+class LineChartSample23 extends StatefulWidget {
+  LineChartSample23({
     super.key,
     required this.historyChartData,
     required int crossAxisCount,
@@ -14,10 +14,10 @@ class LineChartSample95 extends StatefulWidget {
   });
   List<HistoryChartModel2> historyChartData;
   @override
-  State<LineChartSample95> createState() => _LineChartSample95State();
+  State<LineChartSample23> createState() => _LineChartSample23State();
 }
 
-class _LineChartSample95State extends State<LineChartSample95> {
+class _LineChartSample23State extends State<LineChartSample23> {
   List<Color> gradientColors = [
     Color.fromARGB(255, 104, 112, 218),
     Color.fromARGB(255, 104, 112, 218),
@@ -159,42 +159,30 @@ class _LineChartSample95State extends State<LineChartSample95> {
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 12,
+      fontSize: 9,
     );
     String text;
     switch (value.toInt()) {
+      case -2:
+        text = '-2'; // Customize this text for value 1
+        break;
+      case -1:
+        text = '-1(LSL)'; // Customize this text for value 1
+        break;
       case 0:
-        text = '0'; // Customize this text for value 1
+        text = '0'; // Customize this text for value 10
         break;
-      case 10:
-        text = '10'; // Customize this text for value 3
+      case 1:
+        text = '1(USL)'; // Customize this text for value 5
         break;
-      case 20:
-        text = '20'; // Customize this text for value 5
-        break;
-      case 30:
-        text = '30'; // Customize this text for value 8
-        break;
-      case 40:
-        text = '40'; // Customize this text for value 10
-        break;
-      case 50:
-        text = '50'; // Customize this text for value 10
-        break;
-      case 60:
-        text = '60'; // Customize this text for value 10
-        break;
-      case 70:
-        text = '70'; // Customize this text for value 10
-        break;
-      case 80:
-        text = '80'; // Customize this text for value 10
+      case 2:
+        text = '2'; // Customize this text for value 10
         break;
       default:
         return Container();
     }
 
-    return Text(text, style: style, textAlign: TextAlign.left);
+    return Text(text, style: style, textAlign: TextAlign.right);
   }
 
   LineChartData mainData() {
@@ -270,8 +258,8 @@ class _LineChartSample95State extends State<LineChartSample95> {
       ),
       minX: 0,
       maxX: 28,
-      minY: 40,
-      maxY: 85,
+      minY: -2,
+      maxY: 2,
       lineBarsData: [
         LineChartBarData(
           spots: ((() {
@@ -304,8 +292,19 @@ class _LineChartSample95State extends State<LineChartSample95> {
           ),
           barWidth: 2.5,
           isStrokeCapRound: true,
-          dotData: const FlDotData(
+          dotData: FlDotData(
             show: true,
+            getDotPainter: (spot, percent, barData, index) {
+              final radius = 1.5; // Adjust the size of the dots here
+              return FlDotCirclePainter(
+                radius: radius,
+                color: Color.fromARGB(255, 104, 112,
+                    218), // You can also adjust the color of the dots if needed
+                strokeColor: Color.fromARGB(255, 104, 112,
+                    218), // If you want to add border color to the dots
+                strokeWidth: 2, // If you want to add border to the dots
+              );
+            },
           ),
           belowBarData: BarAreaData(
             show: false,
@@ -390,12 +389,15 @@ class _LineChartSample95State extends State<LineChartSample95> {
         // ),
         LineChartBarData(
           spots: const [
-            FlSpot(0, 65),
-            FlSpot(28, 65),
+            FlSpot(0, 0.7),
+            FlSpot(28, 0.7),
           ],
           isCurved: false,
           gradient: LinearGradient(
-            colors: [Colors.green, Colors.green], // Customize colors as needed
+            colors: [
+              Colors.yellow,
+              Colors.yellow
+            ], // Customize colors as needed
           ),
           barWidth: 2,
           isStrokeCapRound: true,
@@ -405,15 +407,12 @@ class _LineChartSample95State extends State<LineChartSample95> {
         ),
         LineChartBarData(
           spots: const [
-            FlSpot(0, 55),
-            FlSpot(28, 55),
+            FlSpot(0, 1),
+            FlSpot(28, 1),
           ],
           isCurved: false,
           gradient: LinearGradient(
-            colors: [
-              Colors.orange,
-              Colors.orange
-            ], // Customize colors as needed
+            colors: [Colors.red, Colors.red], // Customize colors as needed
           ),
           barWidth: 1,
           isStrokeCapRound: true,
@@ -423,15 +422,12 @@ class _LineChartSample95State extends State<LineChartSample95> {
         ),
         LineChartBarData(
           spots: const [
-            FlSpot(0, 75),
-            FlSpot(28, 75),
+            FlSpot(0, -1),
+            FlSpot(28, -1),
           ],
           isCurved: false,
           gradient: LinearGradient(
-            colors: [
-              Colors.orange,
-              Colors.orange
-            ], // Customize colors as needed
+            colors: [Colors.red, Colors.red], // Customize colors as needed
           ),
           barWidth: 1,
           isStrokeCapRound: true,

@@ -88,27 +88,6 @@ class _PasswordSettingPageState extends State<PasswordSettingPage> {
                 decoration: InputDecoration(labelText: 'Old Password'),
                 obscureText: true,
                 style: TextStyle(fontSize: 16), // Set font size of text input
-                // Set height of text input
-                // Adjust the height value according to your preference
-                // You may also use EdgeInsets.symmetric(vertical: ...) to set vertical padding
-                // EdgeInsets.only(bottom: ...) to set only bottom padding, etc.
-                // Ensure the height is enough to accommodate the font size
-                // e.g., for font size 16, height 40 may be appropriate
-                // for larger font sizes, you may need to adjust the height accordingly
-                // You can also set fixed height and width for the text input field
-                // by wrapping it in a SizedBox or Container widget
-                // For example:
-                // child: SizedBox(height: 40, width: double.infinity, child: TextField(...)),
-                // or
-                // child: Container(height: 40, width: double.infinity, child: TextField(...)),
-                // Adjust the height and width values as needed
-                // If you set fixed height and width, ensure the size is enough for the text input
-                // and the container does not overflow
-                // Also, consider using InputDecoration contentPadding property
-                // to adjust the internal padding of the text input field
-                // e.g., contentPadding: EdgeInsets.symmetric(vertical: 12),
-                // This will ensure proper spacing between the text and the border of the input field
-                // You can adjust the vertical value as needed
               ),
               SizedBox(height: 16),
               TextField(

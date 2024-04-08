@@ -5,17 +5,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newmaster/page/page5.dart';
 import 'package:newmaster/page/page8.dart';
 import 'package:newmaster/page/tank/tank1-backup.dart';
+import 'package:newmaster/page/tank/tank10-data/tank10.dart';
 import 'package:newmaster/page/tank/tank10.dart';
 import 'package:newmaster/page/tank/tank11.dart';
 import 'package:newmaster/page/tank/tank12.dart';
+import 'package:newmaster/page/tank/tank13-data/tank13.dart';
 import 'package:newmaster/page/tank/tank13.dart';
+import 'package:newmaster/page/tank/tank14-data/tank14.dart';
 import 'package:newmaster/page/tank/tank14.dart';
 import 'package:newmaster/page/tank/tank2.dart';
 import 'package:newmaster/page/tank/tank3.dart';
 import 'package:newmaster/page/tank/tank4.dart';
+import 'package:newmaster/page/tank/tank5-data/tank5.dart';
 import 'package:newmaster/page/tank/tank5.dart';
 import 'package:newmaster/page/tank/tank6.dart';
 import 'package:newmaster/page/tank/tank7.dart';
+import 'package:newmaster/page/tank/tank8-data/tank8.dart';
 import 'package:newmaster/page/tank/tank8.dart';
 import 'package:newmaster/page/tank/tank9.dart';
 
@@ -135,8 +140,8 @@ class _P1DASHBOARDMAINState extends State<P1DASHBOARDMAIN> {
                           MainBodyContext.read<ChangePage_Bloc>()
                               .add(ChangePage_nodrower());
                         } else if (v.id == 5) {
-                          _showPopup(
-                              context, " ${v.title}\n\nยังไม่ได้ลงทะเบียน");
+                          // _showPopup(
+                          //     context, " ${v.title}\n\nยังไม่ได้ลงทะเบียน");
                           // Navigator.push(
                           //   context,
                           //   MaterialPageRoute(builder: (context) => Tank5()),
@@ -145,10 +150,10 @@ class _P1DASHBOARDMAINState extends State<P1DASHBOARDMAIN> {
                           //   context,
                           //   MaterialPageRoute(builder: (context) => Tank5()),
                           // );
-                          // CuPage = Page5();
-                          //  P3TANKMASTERvar.SelectPage = 4;
-                          // MainBodyContext.read<ChangePage_Bloc>()
-                          //     .add(ChangePage_nodrower());
+                          CuPage = Tank5();
+                           P3TANKMASTERvar.SelectPage = 4;
+                          MainBodyContext.read<ChangePage_Bloc>()
+                              .add(ChangePage_nodrower());
                         } else if (v.id == 6) {
                           _showPopup(
                               context, " ${v.title}\n\nยังไม่ได้ลงทะเบียน");
@@ -172,38 +177,38 @@ class _P1DASHBOARDMAINState extends State<P1DASHBOARDMAIN> {
                           // MainBodyContext.read<ChangePage_Bloc>()
                           //     .add(ChangePage_nodrower());
                         } else if (v.id == 8) {
-                          _showPopup(
-                              context, " ${v.title}\n\nยังไม่ได้ลงทะเบียน");
+                          // _showPopup(
+                          //     context, " ${v.title}\n\nยังไม่ได้ลงทะเบียน");
                           // Navigator.push(
                           //   context,
                           //   MaterialPageRoute(builder: (context) => Tank8()),
                           // );
-                          // CuPage = Page8();
-                          //  P3TANKMASTERvar.SelectPage = 7;
-                          // MainBodyContext.read<ChangePage_Bloc>()
-                          //     .add(ChangePage_nodrower());
+                          CuPage = Tank8();
+                           P3TANKMASTERvar.SelectPage = 7;
+                          MainBodyContext.read<ChangePage_Bloc>()
+                              .add(ChangePage_nodrower());
                         } else if (v.id == 9) {
-                          _showPopup(
-                              context, " ${v.title}\n\nยังไม่ได้ลงทะเบียน");
+                          // _showPopup(
+                          //     context, " ${v.title}\n\nยังไม่ได้ลงทะเบียน");
                           // Navigator.push(
                           //   context,
                           //   MaterialPageRoute(builder: (context) => Tank9()),
                           // );
-                          // CuPage = Tank9();
-                          // P3TANKMASTERvar.SelectPage = 8;
-                          // MainBodyContext.read<ChangePage_Bloc>()
-                          //     .add(ChangePage_nodrower());
+                          CuPage = Tank9();
+                          P3TANKMASTERvar.SelectPage = 8;
+                          MainBodyContext.read<ChangePage_Bloc>()
+                              .add(ChangePage_nodrower());
                         } else if (v.id == 10) {
-                          _showPopup(
-                              context, " ${v.title}\n\nยังไม่ได้ลงทะเบียน");
+                          // _showPopup(
+                          //     context, " ${v.title}\n\nยังไม่ได้ลงทะเบียน");
                           // Navigator.push(
                           //   context,
                           //   MaterialPageRoute(builder: (context) => Tank10()),
                           // );
-                          // CuPage = Page3();
-                          //  P3TANKMASTERvar.SelectPage = 9;
-                          // MainBodyContext.read<ChangePage_Bloc>()
-                          //     .add(ChangePage_nodrower());
+                          CuPage = Tank10();
+                           P3TANKMASTERvar.SelectPage = 9;
+                          MainBodyContext.read<ChangePage_Bloc>()
+                              .add(ChangePage_nodrower());
                         } else if (v.id == 11) {
                           _showPopup(
                               context, " ${v.title}\n\nยังไม่ได้ลงทะเบียน");
@@ -227,27 +232,27 @@ class _P1DASHBOARDMAINState extends State<P1DASHBOARDMAIN> {
                           // MainBodyContext.read<ChangePage_Bloc>()
                           //     .add(ChangePage_nodrower());
                         } else if (v.id == 13) {
-                          _showPopup(
-                              context, " ${v.title}\n\nยังไม่ได้ลงทะเบียน");
+                          // _showPopup(
+                          //     context, " ${v.title}\n\nยังไม่ได้ลงทะเบียน");
                           // Navigator.push(
                           //   context,
                           //   MaterialPageRoute(builder: (context) => Tank13()),
                           // );
-                          // CuPage = Page3();
-                          //  P3TANKMASTERvar.SelectPage = 12;
-                          // MainBodyContext.read<ChangePage_Bloc>()
-                          //     .add(ChangePage_nodrower());
+                          CuPage = Tank13();
+                           P3TANKMASTERvar.SelectPage = 12;
+                          MainBodyContext.read<ChangePage_Bloc>()
+                              .add(ChangePage_nodrower());
                         } else if (v.id == 14) {
-                          _showPopup(
-                              context, " ${v.title}\n\nยังไม่ได้ลงทะเบียน");
+                          // _showPopup(
+                          //     context, " ${v.title}\n\nยังไม่ได้ลงทะเบียน");
                           // Navigator.push(
                           //   context,
                           //   MaterialPageRoute(builder: (context) => Tank14()),
                           // );
-                          // CuPage = Page3();
-                          //  P3TANKMASTERvar.SelectPage = 13;
-                          // MainBodyContext.read<ChangePage_Bloc>()
-                          //     .add(ChangePage_nodrower());
+                          CuPage = Tank14();
+                           P3TANKMASTERvar.SelectPage = 13;
+                          MainBodyContext.read<ChangePage_Bloc>()
+                              .add(ChangePage_nodrower());
                         }
                       }),
                       // SizedBox(height: defaultPadding),

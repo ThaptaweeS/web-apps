@@ -3,9 +3,9 @@ import 'package:http/http.dart' as http;
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:newmaster/responsive.dart';
-import 'package:newmaster/page/tank/tank9-data/line_chart_sample9-2.dart';
-import 'package:newmaster/page/tank/tank9-data/line_chart_sample9.dart';
 
+import 'line_chart_sample9-3.dart';
+import 'line_chart_sample9-4.dart';
 
 List<HistoryChartModel> output = [];
 String test = "";
@@ -49,19 +49,19 @@ class Chart11 extends StatelessWidget {
   }
 }
 
-class Chart133 extends StatefulWidget {
-  Chart133({
+class Chart134 extends StatefulWidget {
+  Chart134({
     Key? key,
   }) : super(key: key);
 
   @override
-  _Chart133State createState() => _Chart133State();
+  _Chart134State createState() => _Chart134State();
 }
 
-class _Chart133State extends State<Chart133> {
+class _Chart134State extends State<Chart134> {
   Future<List<Map<String, dynamic>>> fetchDataFromAPI() async {
     final response =
-        await http.post(Uri.parse('http://127.0.0.1:1111/tank9-TA'));
+        await http.post(Uri.parse('http://127.0.0.1:1111/tank9-AR'));
     if (response.statusCode == 200) {
       final List<dynamic> responseData = json.decode(response.body);
       final List<Map<String, dynamic>> data =
@@ -106,7 +106,7 @@ class _Chart133State extends State<Chart133> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "T.A.(Point) Chart",
+                    "A.R.(Point) Chart",
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontSize: 14, // Set your desired font size here
                         ),
@@ -117,19 +117,19 @@ class _Chart133State extends State<Chart133> {
                 height: 15,
               ),
               Responsive(
-                mobile: LineChartSample22(
+                mobile: LineChartSample32(
                   crossAxisCount: _size.width < 650 ? 2 : 4,
                   childAspectRatio:
                       _size.width < 650 && _size.width > 350 ? 1.3 : 1,
                   historyChartData: output,
                 ),
-                tablet: LineChartSample22(
+                tablet: LineChartSample32(
                   crossAxisCount: _size.width < 650 ? 2 : 4,
                   childAspectRatio:
                       _size.width < 650 && _size.width > 350 ? 1.3 : 1,
                   historyChartData: output,
                 ),
-                desktop: LineChartSample22(
+                desktop: LineChartSample32(
                   childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,
                   crossAxisCount: _size.width < 800 ? 2 : 4,
                   historyChartData: output,
@@ -143,19 +143,19 @@ class _Chart133State extends State<Chart133> {
   }
 }
 
-class Chart13 extends StatefulWidget {
-  Chart13({
+class Chart135 extends StatefulWidget {
+  Chart135({
     Key? key,
   }) : super(key: key);
 
   @override
-  _Chart13State createState() => _Chart13State();
+  _Chart135State createState() => _Chart135State();
 }
 
-class _Chart13State extends State<Chart13> {
+class _Chart135State extends State<Chart135> {
   Future<List<Map<String, dynamic>>> fetchDataFromAPI() async {
     final response =
-        await http.post(Uri.parse('http://127.0.0.1:1111/tank9-FA'));
+        await http.post(Uri.parse('http://127.0.0.1:1111/tank9-AC'));
     if (response.statusCode == 200) {
       final List<dynamic> responseData = json.decode(response.body);
       final List<Map<String, dynamic>> data =
@@ -199,7 +199,7 @@ class _Chart13State extends State<Chart13> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("F.A. (Point) Chart",
+                  Text("A.C. (Point) Chart",
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontSize: 14,
                           )),
@@ -235,8 +235,8 @@ class _Chart13State extends State<Chart13> {
   }
 }
 
-class Chart21 extends StatelessWidget {
-  Chart21({
+class Chart221 extends StatelessWidget {
+  Chart221({
     Key? key,
   }) : super(key: key);
 
@@ -287,7 +287,7 @@ class _BarChartBodyState extends State<BarChartBody> {
 
   Future<void> fetchData() async {
     final response = await http.post(
-      Uri.parse('http://127.0.0.1:1111/chem-feed91'),
+      Uri.parse('http://127.0.0.1:1111/chem-feed2'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -326,7 +326,7 @@ class SimpleBarChart extends StatelessWidget {
           domainFn: (ChartData sales, _) => sales.date,
           measureFn: (ChartData sales, _) => sales.value,
           data: data,
-          displayName: 'PB-3650(M)(kg/day)',
+          displayName: 'FC-4360(kg/day)',
           colorFn: (ChartData sales, _) {
             if (sales.value <= 20) {
               return charts.ColorUtil.fromDartColor(
@@ -393,4 +393,96 @@ class ChartData {
 }
 
 
+class Chart136 extends StatefulWidget {
+  Chart136({
+    Key? key,
+  }) : super(key: key);
 
+  @override
+  _Chart136State createState() => _Chart136State();
+}
+
+class _Chart136State extends State<Chart136> {
+  Future<List<Map<String, dynamic>>> fetchDataFromAPI() async {
+    final response =
+        await http.post(Uri.parse('http://127.0.0.1:1111/tank9-temp'));
+    if (response.statusCode == 200) {
+      final List<dynamic> responseData = json.decode(response.body);
+      final List<Map<String, dynamic>> data =
+          responseData.cast<Map<String, dynamic>>();
+
+      return data;
+    } else {
+      throw Exception('Failed to fetch data');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Map<String, dynamic>>>(
+      future: fetchDataFromAPI(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else {
+          final List<Map<String, dynamic>> input = snapshot.data!;
+          List<HistoryChartModel> output = [];
+          for (var i = 0; i < input.length; i++) {
+            output.add(HistoryChartModel(
+              id: input[i]["id"] ?? "",
+              custFull: input[i]["CustFull"] ?? "",
+              sampleName: input[i]["SampleName"] ?? "",
+              samplingDate:
+                  "${input[i]["date"] ?? ""} 0${input[i]["range"] ?? ""}:00",
+              stdMax: input[i]["StdMax"] ?? "0",
+              stdMin: input[i]["StdMin"] ?? "0",
+              resultApprove: input[i]["value"] ?? "",
+              resultApproveUnit: input[i]["ResultApproveUnit"] ?? "",
+              position: input[i]["Position"] ?? "",
+            ));
+          }
+          final Size _size = MediaQuery.of(context).size;
+          return Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Temp.(°C) Chart",
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontSize: 14, // Set your desired font size here
+                        ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Responsive(
+                mobile: LineChartSample33(
+                  crossAxisCount: _size.width < 650 ? 2 : 4,
+                  childAspectRatio:
+                      _size.width < 650 && _size.width > 350 ? 1.3 : 1,
+                  historyChartData: output,
+                ),
+                tablet: LineChartSample33(
+                  crossAxisCount: _size.width < 650 ? 2 : 4,
+                  childAspectRatio:
+                      _size.width < 650 && _size.width > 350 ? 1.3 : 1,
+                  historyChartData: output,
+                ),
+                desktop: LineChartSample33(
+                  childAspectRatio: _size.width < 1400 ? 1.1 : 1.4,
+                  crossAxisCount: _size.width < 800 ? 2 : 4,
+                  historyChartData: output,
+                ),
+              ),
+            ],
+          );
+        }
+      },
+    );
+  }
+}
