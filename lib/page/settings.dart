@@ -39,24 +39,37 @@ class _PasswordSettingPageState extends State<PasswordSettingPage> {
     // Send the data to the API endpoint
     try {
       final response = await http.post(
-        Uri.parse('http://127.0.0.1:1111/setting'),
+        Uri.parse('http://172.23.10.51:1111/setting'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode(requestData),
       );
+      print(response.statusCode);
+      print(response.body);
 
-      if (response.statusCode == 200) {
-        // Handle success
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Password settings saved successfully'),
-        ));
+      final jsonResponse = json.decode(response.body);
+      final message = jsonResponse['message'];
+      final code = jsonResponse['code'];
+
+      if (code != null) {
+        if (code == 100) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(message),
+          ));
+        } else if (code == 101) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(message),
+          ));
+        } else {
+          // Handle other response codes if needed
+        }
       } else {
-        // Handle error
+        // Handle invalid response
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Failed to save password settings'),
+          content: Text('Invalid response from server'),
         ));
       }
     } catch (e) {
-      // Handle error
+      // Handle network or other errors
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('An error occurred while connecting to the server'),
       ));

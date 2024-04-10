@@ -56,10 +56,52 @@ class SideMenu extends StatelessWidget {
         "accessLevel": 2
       },
       {
+        "title": "Dashboard",
+        "svgSrc": "assets/icons/menu_dashboard.svg",
+        "page": Page01(),
+        "accessLevel": 9
+      },
+      {
+        "title": "Production Monitor",
+        "svgSrc": "assets/icons/menu_monitor.svg",
+        "page": Page00(),
+        "accessLevel": 9
+      },
+      {
+        "title": "Data Input",
+        "svgSrc": "assets/icons/menu_tran.svg",
+        "page": Page02(),
+        "accessLevel": 9
+      },
+      {
+        "title": "Task",
+        "svgSrc": "assets/icons/menu_task.svg",
+        "page": Page3(),
+        "accessLevel": 9
+      },
+      {
+        "title": "Alarm Feed",
+        "svgSrc": "assets/icons/menu_alert.svg",
+        "page": ManualfeedUser(),
+        "accessLevel": 9
+      },
+      {
+        "title": "Settings",
+        "svgSrc": "assets/icons/menu_setting.svg",
+        "page": PasswordSettingPage(),
+        "accessLevel": 9
+      },
+      {
+        "title": "About",
+        "svgSrc": "assets/icons/menu_about.svg",
+        "page": null,
+        "accessLevel": 9
+      },
+      {
         "title": "Notification",
         "svgSrc": "assets/icons/menu_notification.svg",
         "page": null,
-        "accessLevel": [2, 5]
+        "accessLevel": [2, 5, 9]
       },
       {
         "title": "Settings",
@@ -77,7 +119,7 @@ class SideMenu extends StatelessWidget {
         "title": "Logout",
         "svgSrc": "assets/icons/logout-svgrepo-com.svg",
         "page": null,
-        "accessLevel": [2, 5]
+        "accessLevel": [2, 5, 9]
       },
       {
         "title": "About",
@@ -147,8 +189,8 @@ class SideMenu extends StatelessWidget {
         return AlertDialog(
           title: Text('About'),
           content: Text(
-            'Developer by Automation Team. \n © 2020 Thai Parkerizing Co., Ltd. All rights reserved.',
-            style: TextStyle(fontSize: 16.0),
+            'Web application V.1.0.1 \n Developer by Automation Team.',
+            style: TextStyle(fontSize: 14.0),
           ),
           actions: [
             TextButton(

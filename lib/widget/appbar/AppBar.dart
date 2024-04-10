@@ -128,7 +128,7 @@ class _IconBellState extends State<IconBell> {
   Future<void> fetchData() async {
     try {
       // Make a GET request to the API
-      final response = await http.post(Uri.parse('http://127.0.0.1:1111/notify'));
+      final response = await http.post(Uri.parse('http://172.23.10.51:1111/notify'));
 
       if (response.statusCode == 200) {
         // Parse the response body

@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-//--------------------------------------------- Bloc
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../bloc/BlocEvent/LoginEvent.dart';
-import '../bloc/cubit/Rebuild.dart';
 import '../mainBody.dart';
 import '../widget/common/ComInputText.dart';
 import '../data/global.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class LoginPageWidget extends StatelessWidget {
   const LoginPageWidget({Key? key}) : super(key: key);
@@ -68,19 +63,7 @@ class LoginPageWidget extends StatelessWidget {
                   ),
                   SizedBox(
                     height: 40,
-                    // child: ComInputText(
-                    //   height: 40,
-                    //   width: 240,
-                    //   isPassword: true,
-                    //   isContr: logindata.isControl,
-                    //   fnContr: (input) {
-                    //     logindata.isControl = input;
-                    //   },
-                    //   sValue: logindata.userPASS,
-                    //   returnfunc: (String s) {
-                    //     logindata.userPASS = s;
-                    //   },
-                    // ),
+                
                     child: ComInputText(
                       keyboardtype: TextInputType.visiblePassword,
                       nLimitedChar: 50,
@@ -138,12 +121,12 @@ class _LoginSignin extends StatelessWidget {
           child: const Align(
             alignment: Alignment.center,
             child: Text(
-              "Sign IN",
+              "Login",
               style: TextStyle(
                 fontFamily: 'Mitr',
                 color: Colors.black,
-                fontSize: 14,
-                fontWeight: FontWeight.w300,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.normal,
                 letterSpacing: 0,
               ),
@@ -153,46 +136,3 @@ class _LoginSignin extends StatelessWidget {
   }
 }
 
-// Future<void> sendLoginRequest(String username, String password) async {
-//   final url = Uri.parse(
-//       'http://127.0.0.1:1111/login'); // Replace with your API endpoint
-
-//   try {
-//     final response = await http.post(
-//       url,
-//       headers: {
-//         'Content-Type': 'application/json', // Set the appropriate content type
-//       },
-//       body: json.encode({
-//         'username': username,
-//         'password': password,
-//       }),
-//     );
-
-//     if (response.statusCode == 200) {
-//       final responseData = json.decode(response.body);
-//       String permission = responseData['permission'];
-//       String name = responseData['name'];
-
-//       print("Permission: $permission" );
-//       print("Name API: $name" );
-//       print("-------------------------------------");
-//       token = permission;
-//       name = name;
-//       print('Token2: $token');
-//       print('Name2: $name');
-//       print("-------------------------------------");
-
-//       LoginContext.read<Login_Bloc>().add(LoginPage());
-//     } else {
-//       token = "";
-//       LoginContext.read<Login_Bloc>().add(LoginPage());
-//     }
-//   } catch (error) {
-//     // Handle any network-related errors here
-//     print('Error: $error');
-//     LoginContext.read<Login_Bloc>().add(LoginPage());
-//   }
-
-  
-// }

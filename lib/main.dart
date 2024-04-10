@@ -52,7 +52,7 @@ class MainContext extends StatefulWidget {
 }
 
 class _MainContextState extends State<MainContext> {
-  bool isDarkMode = true;
+  bool isDarkMode = false;
 
   void toggleDarkMode() {
     setState(() {
@@ -69,7 +69,7 @@ class _MainContextState extends State<MainContext> {
           theme: ThemeData.dark().copyWith(
             scaffoldBackgroundColor: bgColor,
             textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-                .apply(bodyColor: Colors.white),
+                .apply(bodyColor: Color.fromARGB(255, 233, 230, 230)),
             canvasColor: secondaryColor,
           ),
           home: const MainBlocRebuild(),
