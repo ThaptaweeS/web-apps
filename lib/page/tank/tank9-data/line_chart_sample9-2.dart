@@ -19,8 +19,8 @@ class LineChartSample23 extends StatefulWidget {
 
 class _LineChartSample23State extends State<LineChartSample23> {
   List<Color> gradientColors = [
-    Color.fromARGB(255, 104, 112, 218),
-    Color.fromARGB(255, 104, 112, 218),
+    Color.fromARGB(255, 194, 197, 247),
+    Color.fromARGB(255, 158, 160, 182),
   ];
 
   bool showAvg = false;
@@ -166,20 +166,20 @@ class _LineChartSample23State extends State<LineChartSample23> {
       case 0:
         text = '0'; // Customize this text for value 1
         break;
-      case 2:
-        text = '2(LSL)'; // Customize this text for value 1
+      case 20:
+        text = '20'; // Customize this text for value 1
         break;
-      case 4:
-        text = '4'; // Customize this text for value 10
+      case 40:
+        text = '40'; // Customize this text for value 10
         break;
-      case 6:
-        text = '6'; // Customize this text for value 3
+      case 60:
+        text = '60'; // Customize this text for value 3
         break;
-      case 8:
-        text = '8(USL)'; // Customize this text for value 5
+      case 80:
+        text = '80(USL)'; // Customize this text for value 5
         break;
-      case 10:
-        text = '10'; // Customize this text for value 10
+      case 100:
+        text = '100'; // Customize this text for value 10
         break;
       default:
         return Container();
@@ -262,7 +262,7 @@ class _LineChartSample23State extends State<LineChartSample23> {
       minX: 0,
       maxX: 28,
       minY: 0,
-      maxY: 10,
+      maxY: 100,
       lineBarsData: [
         LineChartBarData(
           spots: ((() {
@@ -410,8 +410,8 @@ class _LineChartSample23State extends State<LineChartSample23> {
         ),
         LineChartBarData(
           spots: const [
-            FlSpot(0, 2),
-            FlSpot(28, 2),
+            FlSpot(0, 0),
+            FlSpot(28, 0),
           ],
           isCurved: false,
           gradient: LinearGradient(
@@ -425,8 +425,8 @@ class _LineChartSample23State extends State<LineChartSample23> {
         ),
         LineChartBarData(
           spots: const [
-            FlSpot(0, 8),
-            FlSpot(28, 8),
+            FlSpot(0, 80),
+            FlSpot(28, 80),
           ],
           isCurved: false,
           gradient: LinearGradient(

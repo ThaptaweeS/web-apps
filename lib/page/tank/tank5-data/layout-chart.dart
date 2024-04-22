@@ -199,7 +199,7 @@ class _Chart13State extends State<Chart13> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("F.E. (Point) Chart",
+                  Text("F.e. (Point) Chart",
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontSize: 14,
                           )),

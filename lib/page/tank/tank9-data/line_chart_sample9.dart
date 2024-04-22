@@ -582,20 +582,20 @@ class _LineChartSample22State extends State<LineChartSample22> {
     );
     String text;
     switch (value.toInt()) {
-      case 24:
-        text = '24'; // Customize this text for value 1
+      case 8:
+        text = '8'; // Customize this text for value 1
         break;
-      case 26:
-        text = '26(LSL)'; // Customize this text for value 3
+      case 10:
+        text = '10(LSL)'; // Customize this text for value 3
         break;
-      case 26:
-        text = '28(UCL)'; // Customize this text for value 3
+      case 13:
+        text = '12.5(UCL)'; // Customize this text for value 3
         break;
-      case 30:
-        text = '30(USL)'; // Customize this text for value 5
+      case 15:
+        text = '15(USL)'; // Customize this text for value 5
         break;
-      case 32:
-        text = '32'; // Customize this text for value 10
+      case 18:
+        text = '18'; // Customize this text for value 10
         break;
       default:
         return Container();
@@ -677,8 +677,8 @@ class _LineChartSample22State extends State<LineChartSample22> {
       ),
       minX: 0,
       maxX: 28,
-      minY: 24,
-      maxY: 32,
+      minY: 8,
+      maxY: 18,
       lineBarsData: [
         LineChartBarData(
           spots: ((() {
@@ -736,8 +736,8 @@ class _LineChartSample22State extends State<LineChartSample22> {
         ),
         LineChartBarData(
           spots: const [
-            FlSpot(0, 28),
-            FlSpot(28, 28),
+            FlSpot(0, 12.5),
+            FlSpot(28, 12.5),
           ],
           isCurved: false,
           gradient: LinearGradient(
@@ -754,8 +754,8 @@ class _LineChartSample22State extends State<LineChartSample22> {
         ),
         LineChartBarData(
           spots: const [
-            FlSpot(0, 26),
-            FlSpot(28, 26),
+            FlSpot(0, 15),
+            FlSpot(28, 15),
           ],
           isCurved: false,
           gradient: LinearGradient(
@@ -769,8 +769,8 @@ class _LineChartSample22State extends State<LineChartSample22> {
         ),
         LineChartBarData(
           spots: const [
-            FlSpot(0, 30),
-            FlSpot(28, 30),
+            FlSpot(0, 10),
+            FlSpot(28, 10),
           ],
           isCurved: false,
           gradient: LinearGradient(

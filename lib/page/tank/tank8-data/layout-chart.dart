@@ -61,7 +61,7 @@ class Chart133 extends StatefulWidget {
 class _Chart133State extends State<Chart133> {
   Future<List<Map<String, dynamic>>> fetchDataFromAPI() async {
     final response =
-        await http.post(Uri.parse('http://172.23.10.51:1111/tank8-ph'));
+        await http.post(Uri.parse('http://172.23.10.51:1111/tank8-phh'));
     if (response.statusCode == 200) {
       final List<dynamic> responseData = json.decode(response.body);
       final List<Map<String, dynamic>> data =
