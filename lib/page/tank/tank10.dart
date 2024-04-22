@@ -39,9 +39,9 @@ class _Tank10BodyPageState extends State<Tank10BodyPage> {
         child: Column(
           children: [
             Text(
-        'Tank10 : Data',
-        style: TextStyle(fontSize: 20),
-      ), 
+              'Tank10 : Data',
+              style: TextStyle(fontSize: 20),
+            ),
             buildTable2(), // Your table widget
           ],
         ),
@@ -141,6 +141,9 @@ class _Tank10BodyPageState extends State<Tank10BodyPage> {
     final dateFormat = DateFormat('dd-MM-yyyy');
     final timeFormat = DateFormat('HH:mm:ss');
 
+    // Display "-" when value is 0, otherwise display the actual value
+    String displayValue = (value == '0') ? '-' : (value ?? '');
+
     return TableRow(
       children: [
         TableCell(
@@ -164,7 +167,7 @@ class _Tank10BodyPageState extends State<Tank10BodyPage> {
         TableCell(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(value ?? ''),
+            child: Text(displayValue),
           ),
         ),
         TableCell(

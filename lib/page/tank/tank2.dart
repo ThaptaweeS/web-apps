@@ -138,60 +138,63 @@ class _Tank2BodyPageState extends State<Tank2BodyPage> {
   }
 
   TableRow buildTableRow2(String? round, String? data, String? detail,
-      String? value, String? username, String? time, String? date) {
-    // Define date and time format
-    final dateFormat = DateFormat('dd-MM-yyyy');
-    final timeFormat = DateFormat('HH:mm:ss');
+    String? value, String? username, String? time, String? date) {
+  // Define date and time format
+  final dateFormat = DateFormat('dd-MM-yyyy');
+  final timeFormat = DateFormat('HH:mm:ss');
 
-    return TableRow(
-      children: [
-        TableCell(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(round ?? ''),
-          ),
+  // Display "-" when value is 0, otherwise display the actual value
+  String displayValue = (value == '0') ? '-' : (value ?? '');
+
+  return TableRow(
+    children: [
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(round ?? ''),
         ),
-        TableCell(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(data ?? ''),
-          ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(data ?? ''),
         ),
-        TableCell(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(detail ?? ''),
-          ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(detail ?? ''),
         ),
-        TableCell(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(value ?? ''),
-          ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(displayValue),
         ),
-        TableCell(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(username ?? ''),
-          ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(username ?? ''),
         ),
-        TableCell(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-                time != null ? timeFormat.format(DateTime.parse(time)) : ''),
-          ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+              time != null ? timeFormat.format(DateTime.parse(time)) : ''),
         ),
-        TableCell(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-                date != null ? dateFormat.format(DateTime.parse(date)) : ''),
-          ),
+      ),
+      TableCell(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+              date != null ? dateFormat.format(DateTime.parse(date)) : ''),
         ),
-      ],
-    );
-  }
+      ),
+    ],
+  );
+}
 
   void fetchDataFromAPI() async {
     final url = 'http://172.23.10.51:1111/tank2task';
