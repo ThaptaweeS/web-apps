@@ -189,7 +189,7 @@ class SideMenu extends StatelessWidget {
         return AlertDialog(
           title: Text('About'),
           content: Text(
-            'Web application V.1.0.1 \n Developer by Automation Team.',
+            'Web application V.1.0.5 \n Developer by Automation Team.',
             style: TextStyle(fontSize: 14.0),
           ),
           actions: [
