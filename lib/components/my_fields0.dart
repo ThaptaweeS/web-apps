@@ -72,21 +72,25 @@ class _MyFilesState extends State<MyFiles> {
   }
 
   void _showPopupForTenSeconds() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('แจ้งเตือน'),
-          content: Text('ได้รับข้อมูลเคมีที่ต้องเติมเพิ่ม'),
-        );
-      },
-    );
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('แจ้งเตือน'),
+        content: Text('ได้รับข้อมูลเคมีที่ต้องเติมเพิ่ม'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('ยืนยัน'),
+          ),
+        ],
+      );
+    },
+  );
+}
 
-    // Close the popup after 10 seconds
-    Future.delayed(Duration(seconds: 10), () {
-      Navigator.of(context).pop();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
