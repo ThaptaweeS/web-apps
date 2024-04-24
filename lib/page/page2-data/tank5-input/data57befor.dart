@@ -31,8 +31,8 @@ class _Tank57BeforePageState extends State<Tank57BeforePage> {
   // Method to fetch roundValue from the API
   void fetchRoundValue() async {
     try {
-      final response =
-          await http.post(Uri.parse('http://172.23.10.51:1111/tank5beforecheck7'));
+      final response = await http
+          .post(Uri.parse('http://172.23.10.51:1111/tank5beforecheck7'));
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
         setState(() {
@@ -190,6 +190,36 @@ class _Tank57BeforePageState extends State<Tank57BeforePage> {
   }
 
   void saveValuesToAPI(BuildContext context) async {
+    // Create a dialog to confirm sending data to the API
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Confirm'),
+          content: Text(
+              'Concentration (%) ควรอยู่ระหว่าง 10 ถึง 15.\nFe(%) ควรอยู่ระหว่าง 0 ถึง 80.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Close the dialog and proceed to send data to the API
+                Navigator.of(context).pop();
+                sendDataToAPI(context);
+              },
+              child: Text('Confirm'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void sendDataToAPI(BuildContext context) async {
     final url = 'http://172.23.10.51:1111/t57b';
     final ConValue = ConController.text;
     final FeValue = FeController.text;

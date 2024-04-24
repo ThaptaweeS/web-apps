@@ -189,8 +189,37 @@ class _Tank81BeforePageState extends State<Tank81BeforePage> {
         (pHValue >= 0.1 && pHValue <= 80.0);
   }
 
-  void saveValuesToAPI(BuildContext context) async {
-    final url = 'http://172.23.10.51:1111/t81b';
+   void saveValuesToAPI(BuildContext context) async {
+  // Create a dialog to confirm sending data to the API
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Confirm'),
+        content: Text('T.AI.(Point) ควรอยู่ระหว่าง 2 ถึง 8\npH ควรอยู่ระหว่าง 8.5 ถึง 9.5'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              // Close the dialog and proceed to send data to the API
+              Navigator.of(context).pop();
+              sendDataToAPI(context);
+            },
+            child: Text('Confirm'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+void sendDataToAPI(BuildContext context) async {
+ final url = 'http://172.23.10.51:1111/t81b';
     final TAIValue = TAIController.text;
     final pHValue = pHController.text;
     final Round = roundValue.toString(); // Convert to string

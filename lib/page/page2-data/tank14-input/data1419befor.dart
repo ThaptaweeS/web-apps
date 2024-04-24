@@ -199,7 +199,36 @@ class _Tank1419BeforePageState extends State<Tank1419BeforePage> {
   }
 
   void saveValuesToAPI(BuildContext context) async {
-    final url = 'http://172.23.10.51:1111/t1419b';
+  // Create a dialog to confirm sending data to the API
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Confirm'),
+        content: Text('Concentration (%) ควรอยู่ระหว่าง 1.5 ถึง 2.5\nTemp.(°C) ควรอยู่ระหว่าง 75 ถึง 85.\nF.A. (Point) ควรอยู่ระหว่าง -1 ถึง 1.'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              // Close the dialog and proceed to send data to the API
+              Navigator.of(context).pop();
+              sendDataToAPI(context);
+            },
+            child: Text('Confirm'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+void sendDataToAPI(BuildContext context) async {
+ final url = 'http://172.23.10.51:1111/t1419b';
     final ConValue = ConController.text;
     final tempValue = tempController.text;
     final FAValue = FAController.text;

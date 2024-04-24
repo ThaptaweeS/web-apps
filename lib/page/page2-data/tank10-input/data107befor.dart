@@ -243,8 +243,37 @@ class _Tank107BeforePageState extends State<Tank107BeforePage> {
         (TAIValue >= 26.0 && TAIValue <= 30.0);
   }
 
-  void saveValuesToAPI(BuildContext context) async {
-    final url = 'http://172.23.10.51:1111/t107b';
+   void saveValuesToAPI(BuildContext context) async {
+  // Create a dialog to confirm sending data to the API
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Confirm'),
+        content: Text('T.A. (Point) ควรอยู่ระหว่าง 30.0 และ 36.0 \nF.A. (Point) ควรอยู่ระหว่าง 4.0 และ 4.7\nA.C. (Point) ควรอยู่ระหว่าง 1 และ 3\nTemp.(°C) ควรอยู่ระหว่าง 70 และ 80.'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              // Close the dialog and proceed to send data to the API
+              Navigator.of(context).pop();
+              sendDataToAPI(context);
+            },
+            child: Text('Confirm'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+void sendDataToAPI(BuildContext context) async {
+  final url = 'http://172.23.10.51:1111/t107b';
     final TAIValue = TAIController.text;
     final tempValue = tempController.text;
     final FAValue = FAController.text;
@@ -313,6 +342,8 @@ class _Tank107BeforePageState extends State<Tank107BeforePage> {
       );
     }
   }
+
+
 
   Widget buildTable2() {
     // Filter the table data based on the entered round number
