@@ -123,7 +123,7 @@ class _MyFilesState extends State<MyFiles> {
                 SizedBox(width: 15), // Add spacing between circle icons
                 CircleAvatar(
                   backgroundColor:
-                      Colors.yellow, // Customize the color of the circle icon
+                      Colors.orange, // Customize the color of the circle icon
                   radius: 10, // Customize the size of the circle icon
                 ),
                 SizedBox(width: 5),
